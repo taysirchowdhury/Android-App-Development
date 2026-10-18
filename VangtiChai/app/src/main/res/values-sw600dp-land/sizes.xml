@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- All tablet text sizes, margins, paddings and fixed dimensions live here. -->
+    <dimen name="app_bar_height">54dp</dimen>
+    <dimen name="app_bar_padding">22dp</dimen>
+    <dimen name="app_bar_text_size">20sp</dimen>
+    <dimen name="screen_horizontal_padding">26dp</dimen>
+    <dimen name="amount_top_margin">24dp</dimen>
+    <dimen name="amount_text_size">22sp</dimen>
+    <dimen name="notes_top_margin">44dp</dimen>
+    <dimen name="note_text_size">19sp</dimen>
+    <dimen name="note_row_height">61dp</dimen>
+    <dimen name="notes_column_gap">18dp</dimen>
+    <dimen name="keypad_start_margin">22dp</dimen>
+    <dimen name="keypad_top_offset">0dp</dimen>
+    <dimen name="key_height">62dp</dimen>
+    <dimen name="key_text_size">21sp</dimen>
+    <dimen name="key_gap">3dp</dimen>
+    <dimen name="key_corner_radius">0dp</dimen>
+    <dimen name="content_max_width">990dp</dimen>
+    <fraction name="tablet_landscape_first_split">22%</fraction>
+    <fraction name="tablet_landscape_second_split">45%</fraction>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Phone portrait; all actual dimensions are stored in resources. -->
+    <dimen name="app_bar_height">52dp</dimen>
+    <dimen name="app_bar_padding">16dp</dimen>
+    <dimen name="app_bar_text_size">18sp</dimen>
+    <dimen name="screen_horizontal_padding">12dp</dimen>
+    <dimen name="amount_top_margin">42dp</dimen>
+    <dimen name="amount_text_size">18sp</dimen>
+    <dimen name="notes_top_margin">42dp</dimen>
+    <dimen name="note_text_size">16sp</dimen>
+    <dimen name="note_row_height">53dp</dimen>
+    <dimen name="notes_column_gap">12dp</dimen>
+    <dimen name="keypad_start_margin">6dp</dimen>
+    <dimen name="keypad_top_offset">56dp</dimen>
+    <dimen name="key_height">48dp</dimen>
+    <dimen name="key_text_size">17sp</dimen>
+    <dimen name="key_gap">2dp</dimen>
+    <dimen name="key_corner_radius">0dp</dimen>
+    <dimen name="content_max_width">720dp</dimen>
+</resources>

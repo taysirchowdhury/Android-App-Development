@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vangti_teal">
+
+    <!-- Nexus 10 portrait: toolbar plus a centered tablet workspace. -->
+    <TextView
+        android:id="@+id/appBar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/app_bar_height"
+        android:paddingStart="@dimen/app_bar_padding"
+        android:paddingEnd="@dimen/app_bar_padding"
+        android:gravity="center_vertical"
+        android:background="@color/vangti_teal"
+        android:text="@string/app_name"
+        android:textColor="@color/vangti_white"
+        android:textSize="@dimen/app_bar_text_size"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/vangti_white"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/amountText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/amount_top_margin"
+            android:layout_marginStart="@dimen/screen_horizontal_padding"
+            android:layout_marginEnd="@dimen/screen_horizontal_padding"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="start"
+            android:text="@string/taka_empty"
+            android:textColor="@color/vangti_text"
+            android:textSize="@dimen/amount_text_size"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Unlike the phone's weighted LinearLayout, tablet uses a
+             percentage Guideline to control notes/keypad proportions. -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/tabletWorkspace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/notes_top_margin"
+            android:layout_marginStart="@dimen/screen_horizontal_padding"
+            android:layout_marginEnd="@dimen/screen_horizontal_padding"
+            app:layout_constraintWidth_max="@dimen/content_max_width"
+            app:layout_constraintTop_toBottomOf="@id/amountText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tabletPortraitSplit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:id="@+id/notesLeft"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tabletPortraitSplit" />
+
+            <GridLayout
+                android:id="@+id/keypad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/keypad_top_offset"
+                android:layout_marginStart="@dimen/keypad_start_margin"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tabletPortraitSplit"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
