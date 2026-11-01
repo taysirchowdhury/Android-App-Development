@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#6750A4</color>
+    <color name="primary_dark">#EEEAF5</color>
+    <color name="accent">#6750A4</color>
+    <color name="surface">#FFFAFF</color>
+    <color name="ink">#24212A</color>
+    <color name="muted">#5F5866</color>
+    <color name="white">#FFFFFF</color>
+    <color name="line">#DCD4E2</color>
+    <color name="drawer_surface">#F8F5FC</color>
+    <color name="button_background">#F7F2FA</color>
+    <color name="image_surface">#101D25</color>
+    <color name="video_surface">#09131B</color>
+    <color name="audio_background">#0C1424</color>
+    <color name="audio_card">#18243A</color>
+    <color name="audio_accent">#8895F7</color>
+    <color name="audio_secondary">#B8C2DB</color>
+    <color name="audio_error">#FFB4AB</color>
+</resources>

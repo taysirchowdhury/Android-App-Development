@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph" app:startDestination="@id/broadcastFragment">
+    <fragment android:id="@+id/broadcastFragment"
+        android:name="com.example.cse489assignment2.ui.BroadcastFragment"
+        android:label="@string/app_name" />
+    <fragment android:id="@+id/imageFragment"
+        android:name="com.example.cse489assignment2.ui.ImageFragment"
+        android:label="@string/menu_image" />
+    <fragment android:id="@+id/videoFragment"
+        android:name="com.example.cse489assignment2.ui.VideoFragment"
+        android:label="@string/menu_video" />
+    <fragment android:id="@+id/audioFragment"
+        android:name="com.example.cse489assignment2.ui.AudioFragment"
+        android:label="@string/menu_audio" />
+</navigation>

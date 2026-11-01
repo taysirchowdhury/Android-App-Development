@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/image_surface">
+    <com.example.cse489assignment2.ui.ZoomImageView
+        android:id="@+id/zoom_image" android:layout_width="match_parent" android:layout_height="match_parent"
+        android:contentDescription="@string/image_content_description" />
+    <ProgressBar android:id="@+id/image_loading_indicator" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_gravity="center"
+        android:indeterminateTint="@color/primary" />
+    <TextView android:id="@+id/image_error" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_gravity="center"
+        android:layout_margin="32dp" android:gravity="center"
+        android:padding="20dp" android:background="@drawable/card_bg"
+        android:text="@string/image_error_short" android:textColor="@color/ink"
+        android:visibility="gone" />
+</FrameLayout>

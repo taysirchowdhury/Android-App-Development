@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_screen" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/surface">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/detail_toolbar" android:layout_width="match_parent" android:layout_height="56dp"
+        android:background="@color/surface" app:title="@string/battery_screen_title"
+        app:titleTextColor="@color/ink" app:navigationIcon="@drawable/ic_back" app:navigationIconTint="@color/ink" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:gravity="center" android:orientation="vertical"
+        android:padding="28dp">
+        <TextView android:id="@+id/battery_percentage" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="@string/battery_placeholder"
+            android:textColor="@color/ink" android:textSize="64sp" android:textStyle="bold" />
+        <ProgressBar android:id="@+id/battery_progress" style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent" android:layout_height="10dp"
+            android:layout_marginTop="26dp" android:max="100" android:progressTint="@color/primary" />
+        <TextView android:id="@+id/battery_status" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="18dp"
+            android:gravity="center" android:text="@string/battery_waiting"
+            android:textSize="15sp" android:textColor="@color/muted" />
+    </LinearLayout>
+</LinearLayout>

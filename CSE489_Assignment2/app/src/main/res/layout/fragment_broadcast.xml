@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reference screenshot: prompt + centered spinner near the top; horizontal rule; Proceed underneath. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/surface">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/broadcast_top_area_height"
+        android:orientation="vertical"
+        android:gravity="top|center_horizontal">
+        <TextView
+            android:id="@+id/broadcast_prompt_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/broadcast_prompt_top"
+            android:text="@string/broadcast_prompt"
+            android:textSize="@dimen/broadcast_prompt_text_size"
+            android:textColor="@color/muted" />
+        <Spinner
+            android:id="@+id/broadcast_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/broadcast_spinner_height"
+            android:layout_marginTop="@dimen/broadcast_spinner_top"
+            android:contentDescription="@string/broadcast_prompt" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/broadcast_divider_height"
+        android:background="@color/line" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/proceed_button"
+        style="@style/ReferenceProceedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/broadcast_proceed_top"
+        android:text="@string/proceed"
+        android:textAllCaps="false" />
+</LinearLayout>

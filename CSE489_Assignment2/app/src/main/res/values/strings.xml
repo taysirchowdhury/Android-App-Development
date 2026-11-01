@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">App</string>
+    <string name="menu_broadcast">Broadcast Receiver</string>
+    <string name="menu_image">Image Scale</string>
+    <string name="menu_video">Video</string>
+    <string name="menu_audio">Audio</string>
+    <string name="broadcast_prompt">Select a broadcast type</string>
+    <string name="custom_short">Custom</string>
+    <string name="battery_short">System battery</string>
+    <string name="custom_type">Custom broadcast receiver</string>
+    <string name="battery_type">System battery notification receiver</string>
+    <string name="proceed">Proceed</string>
+    <string name="message_title">Send message</string>
+    <string name="message_hint">Message</string>
+    <string name="send_message">Send</string>
+    <string name="send_error">Enter a message</string>
+    <string name="receiver_waiting">Receiving message…</string>
+    <string name="broadcast_received">Broadcast received successfully</string>
+    <string name="battery_screen_title">Battery</string>
+    <string name="battery_placeholder">--%</string>
+    <string name="battery_waiting">Checking battery…</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="image_content_description">Online photograph. Pinch to zoom.</string>
+    <string name="image_error_short">Could not load image. Tap to retry.</string>
+    <string name="video_preview">Video preview</string>
+    <string name="video_error_short">Unable to play video</string>
+    <string name="audio_error_short">Unable to play audio</string>
+    <string name="audio_icon_description">Music</string>
+    <string name="audio_track_name">Calm instrumental</string>
+    <string name="audio_time_zero">00:00</string>
+</resources>

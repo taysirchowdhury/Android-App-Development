@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Two reference screenshots: narrow mobile view; toolbar + centered prompt, spinner, divider, proceed. -->
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="drawer_width">280dp</dimen>
+    <dimen name="drawer_vertical_padding">14dp</dimen>
+    <dimen name="broadcast_top_area_height">140dp</dimen>
+    <dimen name="broadcast_prompt_top">25dp</dimen>
+    <dimen name="broadcast_spinner_top">6dp</dimen>
+    <dimen name="broadcast_spinner_height">44dp</dimen>
+    <dimen name="broadcast_divider_height">1dp</dimen>
+    <dimen name="broadcast_proceed_top">12dp</dimen>
+    <dimen name="broadcast_prompt_text_size">14sp</dimen>
+    <dimen name="broadcast_spinner_text_size">16sp</dimen>
+</resources>
