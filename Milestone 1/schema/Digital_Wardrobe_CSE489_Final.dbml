@@ -1,0 +1,227 @@
+// DIGITAL WARDROBE & OUTFIT PLANNER — FINAL CLOUD ERD (Supabase PostgreSQL)
+// Architectural model for CSE489: 10 finalized features plus secure account ownership.
+// Paste this entire file into https://dbdiagram.io/d
+// IMPORTANT: auth.users is drawn for reference; it is managed by Supabase Auth.
+// IMPORTANT: this is an EDITABLE DIAGRAM, NOT EXECUTABLE DDL. Use the separate migration SQL.
+// RLS, partial unique indexes, triggers, grants and Storage policies are in the SQL migration.
+
+Project Digital_Wardrobe_Final {
+  database_type: 'PostgreSQL'
+  Note: '10 application tables + Supabase-managed auth.users reference. Partial unique constraints, triggers, RLS and storage settings are in the separate FINAL SQL migration. App is offline-first with Room.'
+}
+
+Enum wardrobe_slot {
+  top
+  bottom
+  footwear
+  outerwear
+  accessory
+  other
+}
+
+// Supabase-managed authentication identity. DO NOT create or alter auth.users.
+Table auth.users [headerColor: #64748B, note: 'Supabase Auth system table, represented only to show the account relationship.'] {
+  id uuid [pk]
+  created_at timestamptz
+}
+
+Table public.profiles [headerColor: #475569, note: 'One profile per authenticated account, created by server-side signup trigger.'] {
+  user_id uuid [pk, not null]
+  display_name varchar(100)
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+}
+
+// F03: Clothing categories drive search and deterministic outfit suggestions.
+Table public.clothing_categories [headerColor: #2563EB, note: 'User-owned categories; slot_kind groups categories into tops, bottoms, footwear, etc.'] {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  name varchar(60) [not null]
+  slot_kind wardrobe_slot [not null]
+  revision integer [not null, default: 1]
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+  deleted_at timestamptz
+
+  indexes {
+    (id, user_id) [unique]
+    (user_id, name) [note: 'Active-name uniqueness is case-insensitive and partial in SQL migration']
+  }
+}
+
+// F01/F02/F03: Clothing records, one cloud photo per item in v1.
+Table public.clothing_items [headerColor: #2563EB, note: 'Cloud path references a private Supabase Storage object; file bytes are not stored in this table.'] {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  category_id uuid [not null]
+  name varchar(120) [not null]
+  primary_color varchar(40)
+  color_hex varchar(7)
+  occasion varchar(40)
+  brand varchar(80)
+  notes text
+  photo_storage_path varchar(512) [note: 'Private path: userUUID/clothingUUID/file.ext; unique when not null']
+  revision integer [not null, default: 1]
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+  deleted_at timestamptz
+
+  indexes {
+    (id, user_id) [unique]
+    (user_id, category_id)
+    (user_id, name)
+    (user_id, occasion)
+  }
+}
+
+// F04: A collection can contain many clothes; a clothing item can be in many collections.
+Table public.seasonal_collections [headerColor: #0D9488, note: 'Examples: Summer, Winter, Monsoon, or a user-defined collection.'] {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  title varchar(100) [not null]
+  season_label varchar(40)
+  revision integer [not null, default: 1]
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+  deleted_at timestamptz
+
+  indexes {
+    (id, user_id) [unique]
+    (user_id, title) [note: 'Only active collection names are unique; enforced in migration']
+  }
+}
+
+Table public.collection_items [headerColor: #0D9488, note: 'Join table for collection membership; no duplicate item within one collection.'] {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  collection_id uuid [not null]
+  clothing_item_id uuid [not null]
+  revision integer [not null, default: 1]
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+  deleted_at timestamptz
+
+  indexes {
+    (collection_id, clothing_item_id) [note: 'Uniqueness applies only when deleted_at is null']
+    (user_id, collection_id)
+    (user_id, clothing_item_id)
+  }
+}
+
+// F05/F06/F07/F08: Suggestions are calculated in Kotlin, not stored as a table.
+Table public.outfits [headerColor: #7C3AED, note: 'Saved outfits with optional 1–5 star rating and user notes. Rule-based suggestions do not require a database entity.'] {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  title varchar(120) [not null]
+  occasion varchar(40)
+  rating smallint [check: `rating >= 1 AND rating <= 5`]
+  notes text
+  revision integer [not null, default: 1]
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+  deleted_at timestamptz
+
+  indexes {
+    (id, user_id) [unique]
+    (user_id, title)
+  }
+}
+
+Table public.outfit_items [headerColor: #7C3AED, note: 'Join table: one outfit contains multiple existing clothes. Slot position allows several accessories.'] {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  outfit_id uuid [not null]
+  clothing_item_id uuid [not null]
+  slot wardrobe_slot [not null]
+  slot_position smallint [not null, default: 0]
+  revision integer [not null, default: 1]
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+  deleted_at timestamptz
+
+  indexes {
+    (outfit_id, clothing_item_id) [note: 'Uniqueness applies only to active links']
+    (outfit_id, slot, slot_position) [note: 'Uniqueness applies only to active positions']
+    (user_id, outfit_id)
+    (user_id, clothing_item_id)
+  }
+}
+
+// F09: V1 permits one scheduled outfit per account per local calendar date.
+Table public.calendar_plans [headerColor: #D97706, note: 'wear_date is a DATE, not a UTC timestamp. Change or clear a day by updating its existing row/tombstone.'] {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  outfit_id uuid [not null]
+  wear_date date [not null]
+  note text
+  revision integer [not null, default: 1]
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+  deleted_at timestamptz
+
+  indexes {
+    (user_id, wear_date) [note: 'One ACTIVE plan per date; partial unique in SQL']
+    (user_id, outfit_id)
+  }
+}
+
+// F10: Each trip has independently tracked clothing packing states.
+Table public.packing_lists [headerColor: #EA580C, note: 'Trip dates are optional; validate end_date >= start_date when both exist.'] {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  title varchar(120) [not null]
+  start_date date
+  end_date date
+  notes text
+  revision integer [not null, default: 1]
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+  deleted_at timestamptz
+
+  indexes {
+    (id, user_id) [unique]
+    (user_id, start_date)
+  }
+
+  checks {
+    `end_date IS NULL OR start_date IS NULL OR end_date >= start_date` [name: 'ck_packing_list_date_range']
+  }
+}
+
+Table public.packing_items [headerColor: #EA580C, note: 'The same clothing item may be packed for multiple trips; each trip has its own packed state.'] {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  packing_list_id uuid [not null]
+  clothing_item_id uuid [not null]
+  is_packed boolean [not null, default: false]
+  packed_at timestamptz
+  revision integer [not null, default: 1]
+  created_at timestamptz [not null, default: `now()`]
+  updated_at timestamptz [not null, default: `now()`]
+  deleted_at timestamptz
+
+  indexes {
+    (packing_list_id, clothing_item_id) [note: 'Uniqueness applies only to active packing entries']
+    (user_id, packing_list_id)
+    (user_id, clothing_item_id)
+  }
+}
+
+// ACCOUNT RELATIONSHIPS
+Ref: auth.users.id - public.profiles.user_id [delete: cascade]
+Ref: public.profiles.user_id < public.clothing_categories.user_id [delete: cascade]
+Ref: public.profiles.user_id < public.clothing_items.user_id [delete: cascade]
+Ref: public.profiles.user_id < public.seasonal_collections.user_id [delete: cascade]
+Ref: public.profiles.user_id < public.outfits.user_id [delete: cascade]
+Ref: public.profiles.user_id < public.calendar_plans.user_id [delete: cascade]
+Ref: public.profiles.user_id < public.packing_lists.user_id [delete: cascade]
+
+// SAME-OWNER COMPOSITE FKs: stop A's items being linked into B's outfit/list/collection.
+Ref: public.clothing_categories.(id, user_id) < public.clothing_items.(category_id, user_id) [delete: no action]
+Ref: public.seasonal_collections.(id, user_id) < public.collection_items.(collection_id, user_id) [delete: cascade]
+Ref: public.clothing_items.(id, user_id) < public.collection_items.(clothing_item_id, user_id) [delete: cascade]
+Ref: public.outfits.(id, user_id) < public.outfit_items.(outfit_id, user_id) [delete: cascade]
+Ref: public.clothing_items.(id, user_id) < public.outfit_items.(clothing_item_id, user_id) [delete: cascade]
+Ref: public.outfits.(id, user_id) < public.calendar_plans.(outfit_id, user_id) [delete: cascade]
+Ref: public.packing_lists.(id, user_id) < public.packing_items.(packing_list_id, user_id) [delete: cascade]
+Ref: public.clothing_items.(id, user_id) < public.packing_items.(clothing_item_id, user_id) [delete: cascade]
