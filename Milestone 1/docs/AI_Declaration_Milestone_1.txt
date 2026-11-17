@@ -1,0 +1,88 @@
+============================================================
+                   AI USAGE DECLARATION
+============================================================
+
+Name: Mohammad Taysir Chowdhury
+Student ID: 23101089
+Assignment: CSE489 - Milestone 1 (Database Schema and Wireframe Diagrams)
+Date: November 16, 2026
+
+------------------------------------------------------------
+1. AI TOOLS USED (check all that apply)
+------------------------------------------------------------
+[ ] None
+[x] ChatGPT
+[ ] GitHub Copilot
+[ ] Google Gemini
+[ ] Claude
+[ ] Cursor
+[ ] Other: __________________________
+
+------------------------------------------------------------
+2. PURPOSE OF AI USE (check all that apply)
+------------------------------------------------------------
+[x] Learning/understanding concepts
+[ ] Debugging my code
+[x] Generating code snippets (DBML schema syntax and structure)
+[x] Writing text content (documentation)
+[x] Design/styling ideas
+[x] Image generation
+[x] Other: Wireframe planning and navigation-flow diagrams
+
+------------------------------------------------------------
+3. DESCRIPTION OF AI USE
+------------------------------------------------------------
+I used ChatGPT (OpenAI) as an AI-assisted design and learning tool
+for Milestone 1 of my Digital Wardrobe & Outfit Planner Android
+application. ChatGPT helped me plan and prepare the database schema
+in DBML format, including tables, attributes, and relationships.
+
+It also assisted with organizing the application screens into
+functional workflows, developing wireframe layouts, generating the
+wireframe diagram images, and revising the navigation arrows and
+screen transitions. I used ChatGPT with Canva-assisted design and
+layout workflows to prepare and organize the wireframe materials.
+ChatGPT also assisted with the accompanying README documentation.
+
+This declaration concerns the schema and wireframe deliverables.
+It does not claim that the complete Android application has been
+implemented or functionally tested.
+
+------------------------------------------------------------
+4. AI-ASSISTED SECTIONS
+------------------------------------------------------------
+List specific files/sections where AI helped significantly:
+
+File: Milestone 1/Schema/Digital_Wardrobe_Final.dbml
+Section: Database tables, fields, relationships, and DBML structure.
+
+File: Milestone 1/Wireframe_Diagrams/01_Authentication_and_Home.png
+Section: Authentication, dashboard, initial wardrobe flow and arrows.
+
+File: Milestone 1/Wireframe_Diagrams/02_Wardrobe_and_Collections.png
+Section: Clothing management, collections, and screen-navigation flow.
+
+File: Milestone 1/Wireframe_Diagrams/03_Outfits_and_Calendar.png
+Section: Outfit workflows, suggestions, calendar, and navigation.
+
+File: Milestone 1/Wireframe_Diagrams/04_Packing_and_Account.png
+Section: Packing, account, synchronization and recovery wireframes.
+
+File: Milestone 1
+Section: Brief descriptions of Milestone 1 deliverables.
+
+------------------------------------------------------------
+5. DECLARATION
+------------------------------------------------------------
+I declare that:
+- This disclosure is complete and accurate
+- I understand all code in my submission
+- I can explain and modify my work if asked
+- I take full responsibility for my submission
+
+Signature: __________________________
+Date: _______________________________
+
+============================================================
+Save as: Milestone 1/docs/AI_Declaration.txt
+============================================================
