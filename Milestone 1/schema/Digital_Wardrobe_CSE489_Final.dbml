@@ -1,8 +1,5 @@
 // DIGITAL WARDROBE & OUTFIT PLANNER — FINAL CLOUD ERD (Supabase PostgreSQL)
-// Architectural model for CSE489: 10 finalized features plus secure account ownership.
-// Paste this entire file into https://dbdiagram.io/d
 // IMPORTANT: auth.users is drawn for reference; it is managed by Supabase Auth.
-// IMPORTANT: this is an EDITABLE DIAGRAM, NOT EXECUTABLE DDL. Use the separate migration SQL.
 // RLS, partial unique indexes, triggers, grants and Storage policies are in the SQL migration.
 
 Project Digital_Wardrobe_Final {
